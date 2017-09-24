@@ -1,5 +1,4 @@
 import urllib.request
-
 sample = "http://www.fanfr.com/scripts/saison4vf/friendsgeneration2.php?nav=script&version=vf&episodescript=412"
 
 seasons = [
@@ -26,7 +25,7 @@ def get_episodes():
             response = urllib.request.urlopen(url)
             data = response.read()      # a `bytes` object
             text = data.decode('utf-8') # a `str`; this step can't be used if data is binary
-            filename_format = "friends_{:d}_{:d}.htm
+            filename_format = "raw_scripts/friends_{:d}_{:d}.htm"
             with open(filename_format.format(i + 1, j), "w") as episode_file:
                 episode_file.write(text)
 
