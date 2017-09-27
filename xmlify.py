@@ -78,7 +78,7 @@ def write_output(conversations,output_file_name):
 				person_uid[person] = p_index
 				p_index += 1
 				person = person_uid[person]
-			file.write("\t\t<utt uid=" + str(person) + ">" + utterance + "</utt>\n")
+			file.write("\t\t<utt uid=\"" + str(person) + "\">" + utterance + "</utt>\n")
 		file.write("\t</s>\n")
 	
 if __name__ == "__main__":
