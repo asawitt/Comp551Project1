@@ -63,15 +63,23 @@ def write_output(conversations,output_file_name):
 		conversation = list(filter(lambda x: "<h3" not in x and "<a" not in x and len(x)>=2, conversation))
 		if not len(conversation):
 			continue
-		file.write("\t<conversation>\n")
+		file.write("\t<s>\n")
+		person_uid = dict()
+		p_index = 0
 		for person_utterance in conversation:
 			person_utterance = str(person_utterance).split("|")
 			if "<h3" in str(person_utterance) or "<a" in str(person_utterance) or len(person_utterance) < 2:
 				continue
 			person = person_utterance[0]
 			utterance = person_utterance[1]
-			file.write("\t\t<utt uid=" + person + ">" + utterance + "</utt>\n")
-		file.write("\t</conversation>\n")
+			if person in person_uid:
+				person = person_uid[person]
+			else:
+				person_uid[person] = p_index
+				p_index += 1
+				person = person_uid[person]
+			file.write("\t\t<utt uid=" + str(person) + ">" + utterance + "</utt>\n")
+		file.write("\t</s>\n")
 	
 if __name__ == "__main__":
 	output_file_name = "output.xml"
